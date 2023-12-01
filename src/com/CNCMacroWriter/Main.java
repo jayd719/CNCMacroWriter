@@ -6,7 +6,7 @@ import java.awt.Color;
 import javax.swing.JFrame;
 
 public class Main {
-    static String appTitle = "CNC MARCO WRITER";
+    static String appTitle = "MARCO WRITER";
 
     public static void main(String[] args) {
 

@@ -23,7 +23,7 @@ public class Header extends JPanel {
 
 	JLabel headerText = new JLabel(" " + Main.appTitle);
 
-	headerText.setFont(new Font("Serif", Font.BOLD, 25));
+	headerText.setFont(new Font("Serif", Font.BOLD, 35));
 	headerText.setForeground(Color.white);
 	headerText.setSize(100, 100);
 	headerText.setIcon(headerIcon);
