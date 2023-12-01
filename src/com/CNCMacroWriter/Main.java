@@ -10,20 +10,22 @@ public class Main {
 
     public static void main(String[] args) {
 
-//	final RTModel model = new RTModel();
+	final ReadProgramContent model = new ReadProgramContent();
 //	final OneFrameView view = new OneFrameView(model);
-	final OptionsPanel opPanel = new OptionsPanel();
+	final OptionsPanel opPanel = new OptionsPanel(model);
 	final Header header = new Header();
+	final BottomSection bottomSection= new BottomSection(model);
 
 	final JFrame f = new JFrame(appTitle);
 	f.setResizable(false);
 	f.getContentPane().setBackground(new Color(123, 50, 255));
-	f.setSize(450, 900);
+	f.setSize(500, 900);
 	f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	f.setLayout(new BorderLayout());
 	f.add(opPanel, BorderLayout.CENTER);
 	f.add(header, BorderLayout.NORTH);
+	f.add(bottomSection, BorderLayout.SOUTH);
 	f.setVisible(true);
     }
 
