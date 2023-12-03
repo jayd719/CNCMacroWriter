@@ -35,10 +35,11 @@ public class ReadProgramContent {
 
     public static void getContent(final String fileName) {
         Path path = Paths.get(fileName);
+        String fileLine;
 
         try (Scanner fileData = new Scanner(path)) {
             while (fileData.hasNextLine()) {
-                String fileLine = fileData.nextLine();
+                fileLine = fileData.nextLine();
                 ++lineCounter;
                 // watch for Cycle End
                 if (fileLine.contains(endDector)) {

@@ -4,6 +4,7 @@ import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class StatusSection extends JPanel {
 
     public StatusSection() {

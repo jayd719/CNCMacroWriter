@@ -5,6 +5,7 @@ import java.awt.Font;
 
 import javax.swing.JLabel;
 
+@SuppressWarnings("serial")
 public class MacroLabel extends JLabel {
 
     public MacroLabel(final String text) {

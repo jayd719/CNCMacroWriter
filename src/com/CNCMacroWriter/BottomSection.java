@@ -12,7 +12,7 @@ public class BottomSection extends JPanel implements ActionListener {
     JButton macroMize;
     final JFileChooser fileSelector = new JFileChooser();
     public BottomSection(final ReadProgramContent model) {
-        selectSource = new JButton("Select File");
+        selectSource = new JButton("MacroMize");
         selectSource.addActionListener(this);
 
         this.setOpaque(false);

@@ -6,7 +6,7 @@ import javax.swing.JTextField;
 public class FileDisplayText extends JTextField {
 
     public FileDisplayText() {
-	this.setSize(400, 1200);
+        this.setSize(400, 1200);
 
     }
 
