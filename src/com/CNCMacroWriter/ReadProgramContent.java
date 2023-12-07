@@ -8,9 +8,9 @@ import java.util.Scanner;
 import java.util.Stack;
 
 public class ReadProgramContent {
-    private static boolean statusMacros = true;
-    private static boolean g10Logic = true;
-    private static boolean engravingSplit = true;
+    private boolean statusMacros;
+    private boolean g10Logic;
+    private boolean engravingSplit;
 
     // private static ArrayList<Integer> sisterToolList = new ArrayList<>();
     // private static int engravingTool = 13;
@@ -31,9 +31,18 @@ public class ReadProgramContent {
     private static String M30 = "M30";
     private static String progStart = "M98<TIMER_RESET>";
 
+    private String programmer;
+    private String workOrder;
+    private String operationNumber;
+
+    private String xCord ;
+    private String yCord ;
+    private String zCord ;
+    private String bCord ;
+
     private static Stack<Integer> toolStack = new Stack<Integer>();
 
-    public static void getContent(final String fileName) {
+    public void getContent(final String fileName) {
         Path path = Paths.get(fileName);
         String fileLine;
 
@@ -41,6 +50,13 @@ public class ReadProgramContent {
             while (fileData.hasNextLine()) {
                 fileLine = fileData.nextLine();
                 ++lineCounter;
+
+                String g10Line ="";
+                if (g10Logic) {
+                    g10Line=String.format("\n\n\nG10 G90 L2 P1 X-%s Y-%s Z-%s B90.0 ", this.xCord,this.yCord,this.zCord,this.bCord);
+                }
+
+
                 // watch for Cycle End
                 if (fileLine.contains(endDector)) {
                     toolEndDetected = true;
@@ -55,16 +71,15 @@ public class ReadProgramContent {
 
                 }
 
-                if(g10Logic){
-                    //TODO add logi
-                }
+                
 
                 if (statusMacros && toolEndDetected && (fileLine.contains(M01) || fileLine.contains(M30))) {
                     ++stageCounter;
 
                     String endOfProgram = "";
                     if (fileLine.contains(M30)) {
-                        endOfProgram = "(END OF PROGRAM)\n#840=99\n";
+                        endOfProgram = "(END OF PROGRAM)\n#849=99\n";
+                        fileLine="M#850";
                     }
                     returnData += String.format(
                             "#840 = %d(FINISHED TOOL)\n#841 = %d(ACTIVE TOOL)\n#842 = %d(STAGE NUMBER)\n#843 = %d(COMPLETED)\n%sM98<DATA_COLLECT>\n",
@@ -73,7 +88,8 @@ public class ReadProgramContent {
                 } else if (fileLine.contains(M06)) {
                     finishedTool = toolStack.pop();
                 } else if (statusMacros && fileLine.contains(progStart)) {
-                    returnData += "#840=0\n#849=0\n#850 = var1 \n#851= var2 \n";
+                    returnData += String.format("#826=%s\n#827=%s\n#828=%s\n#829=0\n#830 = var1 \n#831= var2 \n",
+                            this.workOrder, this.operationNumber, this.programmer)+g10Line;
                 } else {
                     if (engravingSplit) {
                         if (fileLine.contains("ENGRAVINGCHECK")) {
@@ -119,11 +135,42 @@ public class ReadProgramContent {
     }
 
     public void setStatusMacro(final Boolean value) {
-        ReadProgramContent.statusMacros = value;
+        this.statusMacros = value;
     }
 
-    public void setG10Macro(final boolean value){
-        ReadProgramContent.g10Logic= value;
+    public void setG10Macro(final boolean value) {
+        this.g10Logic = value;
     }
 
+    public void setProgramer(final String programmer) {
+        this.programmer = programmer;
+    }
+
+    public void setWorkOrder(final String workOrder) {
+        this.workOrder = workOrder;
+    }
+
+    public void setOperationNumber(final String operationNumber) {
+        this.operationNumber = operationNumber;
+    }
+
+    public void setEngraving(final boolean value) {
+        this.engravingSplit = value;
+    }
+
+    public void setXCord(final String value) {
+        this.xCord = value;
+    }
+
+    public void setYCord(final String value) {
+        this.yCord = value;
+    }
+
+    public void setZCord(final String value) {
+        this.zCord = value;
+    }
+
+    public void setBCord(final String value) {
+        this.bCord = value;
+    }
 }

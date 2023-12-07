@@ -3,6 +3,7 @@ package com.CNCMacroWriter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -26,13 +27,18 @@ public class OptionsPanel extends JPanel implements ActionListener {
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		this.setBorder(new EmptyBorder(75, 50, 100, 50));
 
+
+
+
+		
+
 		g10Logic = new OptionsCheckBox("Add G10 Command");
 		g10Logic.addActionListener(this);
-		g10Section = new G10section();
+		g10Section = new G10section(model);
 
 		statusMacro = new OptionsCheckBox("Add Status Macros");
 		statusMacro.addActionListener(this);
-		statusMacroSection = new StatusSection();
+		statusMacroSection = new StatusSection(model);
 
 		OptionsCheckBox engravingLogic = new OptionsCheckBox("Add Engraving Logic");
 
@@ -66,5 +72,9 @@ public class OptionsPanel extends JPanel implements ActionListener {
 		}
 
 	}
+
+	
+
+
 
 }

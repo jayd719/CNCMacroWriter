@@ -10,10 +10,11 @@ public class Main {
 
 	public static void main(String[] args) {
 
+		final Header header = new Header();
+		
 		final ReadProgramContent model = new ReadProgramContent();
 		// final OneFrameView view = new OneFrameView(model);
 		final OptionsPanel opPanel = new OptionsPanel(model);
-		final Header header = new Header();
 		final BottomSection bottomSection = new BottomSection(model);
 
 		final JFrame f = new JFrame(appTitle);

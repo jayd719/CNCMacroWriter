@@ -11,7 +11,11 @@ public class BottomSection extends JPanel implements ActionListener {
     JButton selectSource;
     JButton macroMize;
     final JFileChooser fileSelector = new JFileChooser();
+    ReadProgramContent model= null;
+
+
     public BottomSection(final ReadProgramContent model) {
+        this.model = model;
         selectSource = new JButton("MacroMize");
         selectSource.addActionListener(this);
 
@@ -22,12 +26,12 @@ public class BottomSection extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==selectSource){
+        if (e.getSource() == selectSource) {
             int selected = fileSelector.showOpenDialog(fileSelector);
-            if (selected==JFileChooser.APPROVE_OPTION){
+            if (selected == JFileChooser.APPROVE_OPTION) {
                 String selectedFile = fileSelector.getSelectedFile().getPath();
-                ReadProgramContent.getContent(selectedFile);
-               
+                this.model.getContent(selectedFile);
+
             }
         }
     }
